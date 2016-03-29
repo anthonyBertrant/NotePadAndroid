@@ -21,7 +21,7 @@ public class NotesDBOpenHelper extends SQLiteOpenHelper {
     public static final String COLUMN_DATE = "date";
 
     //ligne creation de la base
-    private static final String DATABASE_CREATE = "create table " + DATABASE_TABLE + "(" + COLUMN_TITRE + "text not null," +
+    private static final String DATABASE_CREATE = "create table " + DATABASE_TABLE + "(" + COLUMN_TITRE + " text not null," +
             COLUMN_CONTENU + " text not null, " + COLUMN_DATE + ", text not null);" ;
 
     //singleton
@@ -50,5 +50,9 @@ public class NotesDBOpenHelper extends SQLiteOpenHelper {
         + newVersion + ", which will destroy all data");
         db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE);
         onCreate(db);
+    }
+
+    public void addNewNote(Note note){
+
     }
 }

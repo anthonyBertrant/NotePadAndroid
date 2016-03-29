@@ -6,16 +6,18 @@ import java.util.Date;
  * Created by anthony on 25/03/16.
  */
 
-public class Notes {
+public class Note {
     private String titre;   //titre de la note
     private String contenu; //contenue de la note
     private Date date;      //date de creation
+    private String adresse;
 
-    public Notes(String titre, String contenu, Date date){
+    public Note(String titre, String contenu, Date date, String adresse){
         super();
         this.titre = titre;
         this.contenu = contenu;
         this.date = date;
+        this.adresse = adresse;
     }
 
     public String getTitre(){
@@ -30,6 +32,10 @@ public class Notes {
         return date.toString();
     }
 
+    public String getAdresse(){
+        return adresse;
+    }
+
     public void setTitre(String titre){
         this.titre = titre;
     }
@@ -38,9 +44,13 @@ public class Notes {
         this.contenu = contenu;
     }
 
+    public void setAdresse(String adresse){
+        this.adresse = adresse;
+    }
+
     @Override
     public String toString() {
-        return "Notes{" +
+        return "Note{" +
                 "titre='" + titre + '\'' +
                 ", contenu='" + contenu + '\'' +
                 ", date=" + date +
