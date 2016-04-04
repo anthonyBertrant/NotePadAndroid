@@ -1,11 +1,13 @@
 package com.example.anthony.notepadandroidv2;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -33,10 +35,10 @@ public class NewNoteActivity extends AppCompatActivity {
          *
          * ajouter la note dans la bd
          */
-        String titre = inputTitre.getText().toString(); //TODO recuperer le contenu des inputs dans le xml
+        String titre = inputTitre.getText().toString();
         String ville = inputVille.getText().toString();
         String contenu = inputContenu.getText().toString();
-        Calendar cal = Calendar.getInstance(); //TODO recuperer la date presente
+        Calendar cal = Calendar.getInstance();
         SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
         String date = format1.format(cal.getTime());
 
@@ -45,22 +47,32 @@ public class NewNoteActivity extends AppCompatActivity {
             Log.v("Ville: ", ville);
             Log.v("Contenu: ", contenu);
             Log.v("Date: ", date);
+
             //TODO recuper coordonnees gps
 
-            //TODO ajouter dans la base la nouvelle note
+
             Note note = new Note(titre, contenu, date,ville);
 
-            //TODO revenir a MainActivity
+            //ajouter dans la base la nouvelle note
+            NoteDBOpenHelper dbOpenHelper = NoteDBOpenHelper.getNoteBDOpenHelper(getApplicationContext());
+            dbOpenHelper.addNewNote(note);
+
+            //revenir a MainActivity
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         }
         else{
             //TODO afficher un message d'erreur
+            Toast toast = Toast.makeText(getApplicationContext(), "Mauvaise saisie...", Toast.LENGTH_SHORT);
+            toast.show();
         }
-    }
+    }//enregistrer(View view)
 
     public void annuler(View view){
         /**
          * revenir a l'activite precedente
          */
-        //TODO revenir a MainActivity
-    }
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }//annuler(View view)
 }
