@@ -1,5 +1,6 @@
 package com.example.anthony.notepadandroidv2;
 
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -9,15 +10,15 @@ import java.util.Date;
 public class Note {
     private String titre;   //titre de la note
     private String contenu; //contenue de la note
-    private Date date;      //date de creation
-    private String adresse;
+    private String date;      //date de creation
+    private String ville;
 
-    public Note(String titre, String contenu, Date date, String adresse){
+    public Note(String titre, String contenu, String date, String ville){
         super();
         this.titre = titre;
         this.contenu = contenu;
         this.date = date;
-        this.adresse = adresse;
+        this.ville = ville;
     }
 
     public String getTitre(){
@@ -29,11 +30,11 @@ public class Note {
     }
 
     public String getDate(){
-        return date.toString();
+        return date;
     }
 
-    public String getAdresse(){
-        return adresse;
+    public String getVille(){
+        return ville;
     }
 
     public void setTitre(String titre){
@@ -44,8 +45,8 @@ public class Note {
         this.contenu = contenu;
     }
 
-    public void setAdresse(String adresse){
-        this.adresse = adresse;
+    public void setVille(String ville){
+        this.ville = ville;
     }
 
     @Override
