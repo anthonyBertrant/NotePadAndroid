@@ -50,7 +50,6 @@ public class NoteActivity extends AppCompatActivity {
 
             //TODO recuper coordonnees gps
 
-
             Note note = new Note(titre, contenu, date,ville);
 
             //ajouter dans la base la nouvelle note

@@ -4,19 +4,23 @@ package com.example.anthony.notepadandroidv2;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity implements OnListFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity implements OnListFragmentInteractionListener
+                                                                , OnFragmentInteractionListener{
     Fragment[] fragments;
     NoteFragsPagerAdapter fragsPagerAdapter;
     ViewPager mViewPager;
-
+    public static final String EXTRA_MSG_NOTE = "note";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +29,10 @@ public class MainActivity extends AppCompatActivity implements OnListFragmentInt
         //creation des fragments
         fragments = new Fragment[1];
         fragments[0] = NoteListFragment.newInstance(1);
+
+        //affichage
         fragsPagerAdapter = new NoteFragsPagerAdapter(getSupportFragmentManager());
+
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(fragsPagerAdapter);
     }
@@ -37,6 +44,13 @@ public class MainActivity extends AppCompatActivity implements OnListFragmentInt
 
     @Override
     public void onListFragmentInteraction(Note note) {
+        Intent intent = new Intent(this, NoteViewActivity.class);
+        intent.putExtra(EXTRA_MSG_NOTE, note);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
 
     }
 

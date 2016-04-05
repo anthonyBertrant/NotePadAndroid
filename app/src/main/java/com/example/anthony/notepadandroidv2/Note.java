@@ -1,5 +1,6 @@
 package com.example.anthony.notepadandroidv2;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -7,7 +8,7 @@ import java.util.Date;
  * Created by anthony on 25/03/16.
  */
 
-public class Note {
+public class Note implements Serializable{
     private String titre;   //titre de la note
     private String contenu; //contenue de la note
     private String date;      //date de creation
