@@ -18,15 +18,17 @@ public class NoteDBOpenHelper extends SQLiteOpenHelper {
     //Champs de la base
     public static final String COLUMN_ID = "id";
     public static final String COLUMN_TITRE = "titre";
+    public static final String COLUMN_VILLE = "ville";
     public static final String COLUMN_CONTENU = "contenu";
     public static final String COLUMN_DATE = "date";
 
     //ligne creation de la base
     private static final String DATABASE_CREATE = "create table " + DATABASE_TABLE + " ("
-                                                        + COLUMN_ID + " primary key, "
-                                                        + COLUMN_TITRE + " text not null, "
-                                                        + COLUMN_CONTENU + " text not null, "
-                                                        + COLUMN_DATE + " text not null);" ;
+                                                        + COLUMN_ID + " int NOT NULL AUTO_INCREMENT, "
+                                                        + COLUMN_TITRE + " text NOT NULL, "
+                                                        + COLUMN_VILLE + " text NOT NULL, "
+                                                        + COLUMN_CONTENU + " text NOT NULL, "
+                                                        + COLUMN_DATE + " text NOT NULL);" ;
 
     //singleton
     public static NoteDBOpenHelper getNoteBDOpenHelper(Context context){
@@ -58,6 +60,15 @@ public class NoteDBOpenHelper extends SQLiteOpenHelper {
     }
 
     public void addNewNote(Note note){
-        String requete = "alter table " + DATABASE_TABLE ; //TODO
+        String requete = "insert into " + DATABASE_TABLE + "("
+                                                + COLUMN_TITRE + ","
+                                                + COLUMN_VILLE + ","
+                                                + COLUMN_CONTENU + ","
+                                                + COLUMN_DATE + ")"
+                                        + " values ("
+                                                + note.getTitre() + ","
+                                                + note.getVille() + ","
+                                                + note.getContenu() + ","
+                                                + note.getDate() + ");";//TODO
     }
 }

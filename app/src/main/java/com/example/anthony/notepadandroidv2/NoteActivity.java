@@ -26,6 +26,12 @@ public class NoteActivity extends AppCompatActivity {
         inputTitre = (EditText)findViewById(R.id.zoneTitre);
         inputVille = (EditText)findViewById(R.id.zoneVille);
         inputContenu = (EditText)findViewById(R.id.zoneTexte);
+        Note note = (Note)getIntent().getSerializableExtra(MainActivity.EXTRA_MSG_NOTE);
+        if(note != null){
+            inputTitre.setText(note.getTitre());
+            inputVille.setText(note.getVille());
+            inputContenu.setText(note.getContenu());
+        }
     }
 
 
@@ -43,11 +49,6 @@ public class NoteActivity extends AppCompatActivity {
         String date = format1.format(cal.getTime());
 
         if(!titre.equals("") && !ville.equals("") && !contenu.equals("")){
-            Log.v("Titre: ", titre);
-            Log.v("Ville: ", ville);
-            Log.v("Contenu: ", contenu);
-            Log.v("Date: ", date);
-
             //TODO recuper coordonnees gps
 
             Note note = new Note(titre, contenu, date,ville);
