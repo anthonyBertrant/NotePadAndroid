@@ -3,22 +3,14 @@ package com.example.anthony.notepadandroidv2;
 //Accueil de l'application
 
 
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-
-import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements OnListFragmentInteractionListener{
     Fragment[] fragments;
@@ -29,6 +21,8 @@ public class MainActivity extends AppCompatActivity implements OnListFragmentInt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //creation des fragments
         fragments = new Fragment[1];
         fragments[0] = NoteListFragment.newInstance(1);
         fragsPagerAdapter = new NoteFragsPagerAdapter(getSupportFragmentManager());
@@ -37,8 +31,7 @@ public class MainActivity extends AppCompatActivity implements OnListFragmentInt
     }
 
     public void createNewNote(View view){
-        //TODO creer une nouvelle note
-        Intent intent = new Intent(this, NewNoteActivity.class);
+        Intent intent = new Intent(this, NoteActivity.class);
         startActivity(intent);
     }
 
