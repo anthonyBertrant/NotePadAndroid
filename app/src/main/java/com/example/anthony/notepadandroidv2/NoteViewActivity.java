@@ -29,4 +29,8 @@ public class NoteViewActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    public void backToList(View view){
+        finish();
+    }
 }
