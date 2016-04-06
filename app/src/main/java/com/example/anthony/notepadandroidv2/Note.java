@@ -22,6 +22,7 @@ public class Note implements Serializable{
         this.ville = ville;
     }
 
+
     public String getTitre(){
         return titre;
     }

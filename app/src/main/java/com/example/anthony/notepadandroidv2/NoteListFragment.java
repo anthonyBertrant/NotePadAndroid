@@ -65,28 +65,8 @@ public class NoteListFragment extends Fragment {
 
         // Set the adapter
         if (view instanceof RecyclerView) {
-            /* */
-            notes.add(new Note("A", "......", "04/04/16", "Aix-en-Provence"));
-            notes.add(new Note("B", "......", "04/04/16", "Marseille"));
-            notes.add(new Note("C", "......", "04/04/16", "Nice"));
-            notes.add(new Note("D", "......", "04/04/16", "Avignon"));
-            notes.add(new Note("E", "......", "04/04/16", "Toulon"));
-            notes.add(new Note("F", "......", "04/04/16", "Gap"));
-            notes.add(new Note("A", "......", "04/04/16", "Aix-en-Provence"));
-            notes.add(new Note("B", "......", "04/04/16", "Marseille"));
-            notes.add(new Note("C", "......", "04/04/16", "Nice"));
-            notes.add(new Note("D", "......", "04/04/16", "Avignon"));
-            notes.add(new Note("E", "......", "04/04/16", "Toulon"));
-            notes.add(new Note("F", "......", "04/04/16", "Gap"));
-            notes.add(new Note("A", "......", "04/04/16", "Aix-en-Provence"));
-            notes.add(new Note("B", "......", "04/04/16", "Marseille"));
-            notes.add(new Note("C", "......", "04/04/16", "Nice"));
-            notes.add(new Note("D", "......", "04/04/16", "Avignon"));
-            notes.add(new Note("E", "......", "04/04/16", "Toulon"));
-            notes.add(new Note("F", "......", "04/04/16", "Gap"));
-
-            Log.v(">>>>>>>>> NOTES: ", notes.toString());
-            /* */
+            NoteDB noteDB = new NoteDB(getContext());
+            notes = noteDB.getNotes();
 
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;

@@ -21,10 +21,14 @@ public class MainActivity extends AppCompatActivity implements OnListFragmentInt
     NoteFragsPagerAdapter fragsPagerAdapter;
     ViewPager mViewPager;
     public static final String EXTRA_MSG_NOTE = "note";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        NoteDBOpenHelper.getNoteBDOpenHelper(getBaseContext());
 
         //creation des fragments
         fragments = new Fragment[1];
@@ -36,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements OnListFragmentInt
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(fragsPagerAdapter);
     }
+
 
     public void createNewNote(View view){
         Intent intent = new Intent(this, NoteActivity.class);

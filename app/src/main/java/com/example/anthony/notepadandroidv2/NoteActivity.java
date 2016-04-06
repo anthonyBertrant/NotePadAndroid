@@ -54,8 +54,8 @@ public class NoteActivity extends AppCompatActivity {
             Note note = new Note(titre, contenu, date,ville);
 
             //ajouter dans la base la nouvelle note
-            NoteDBOpenHelper dbOpenHelper = NoteDBOpenHelper.getNoteBDOpenHelper(getApplicationContext());
-            dbOpenHelper.addNewNote(note);
+            NoteDB noteDB = new NoteDB(getApplicationContext());
+            noteDB.addNewNote(note);
 
             //revenir a MainActivity
             Intent intent = new Intent(this, MainActivity.class);

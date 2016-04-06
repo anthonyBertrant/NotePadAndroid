@@ -11,20 +11,20 @@ import android.util.Log;
 public class NoteDBOpenHelper extends SQLiteOpenHelper {
 
     private final static String DATABASE_NAME = "notesDataBase.db";
-    final static String DATABASE_TABLE = "notes";
+    final static String DATABASE_TABLE_NOTE = "NOTES";
     private final static int DATABASE_VERSION = 1;
     private static NoteDBOpenHelper instance = null;
 
     //Champs de la base
-    public static final String COLUMN_ID = "id";
-    public static final String COLUMN_TITRE = "titre";
-    public static final String COLUMN_VILLE = "ville";
-    public static final String COLUMN_CONTENU = "contenu";
-    public static final String COLUMN_DATE = "date";
+    public static final String COLUMN_ID = "ID";
+    public static final String COLUMN_TITRE = "TITRE";
+    public static final String COLUMN_VILLE = "VILLE";
+    public static final String COLUMN_CONTENU = "CNTENU";
+    public static final String COLUMN_DATE = "DATE";
 
     //ligne creation de la base
-    private static final String DATABASE_CREATE = "create table " + DATABASE_TABLE + " ("
-                                                        + COLUMN_ID + " int NOT NULL AUTO_INCREMENT, "
+    private static final String DATABASE_CREATE = "create table " + DATABASE_TABLE_NOTE + " ("
+                                                        + COLUMN_ID + " INTEGER PRIMARY KEY   AUTOINCREMENT, "
                                                         + COLUMN_TITRE + " text NOT NULL, "
                                                         + COLUMN_VILLE + " text NOT NULL, "
                                                         + COLUMN_CONTENU + " text NOT NULL, "
@@ -55,20 +55,7 @@ public class NoteDBOpenHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.w(NoteDBOpenHelper.class.getName(), "Upgrading database from version " + oldVersion + " to "
         + newVersion + ", which will destroy all data");
-        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_NOTE);
         onCreate(db);
-    }
-
-    public void addNewNote(Note note){
-        String requete = "insert into " + DATABASE_TABLE + "("
-                                                + COLUMN_TITRE + ","
-                                                + COLUMN_VILLE + ","
-                                                + COLUMN_CONTENU + ","
-                                                + COLUMN_DATE + ")"
-                                        + " values ("
-                                                + note.getTitre() + ","
-                                                + note.getVille() + ","
-                                                + note.getContenu() + ","
-                                                + note.getDate() + ");";//TODO
     }
 }
