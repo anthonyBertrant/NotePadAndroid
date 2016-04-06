@@ -9,6 +9,7 @@ import java.util.Date;
  */
 
 public class Note implements Serializable{
+    private int id;
     private String titre;   //titre de la note
     private String contenu; //contenue de la note
     private String date;      //date de creation
@@ -16,12 +17,25 @@ public class Note implements Serializable{
 
     public Note(String titre, String contenu, String date, String ville){
         super();
+        this.id = -1;
         this.titre = titre;
         this.contenu = contenu;
         this.date = date;
         this.ville = ville;
     }
 
+    public Note(int id, String titre, String contenu, String date, String ville){
+        super();
+        this.id = id;
+        this.titre = titre;
+        this.contenu = contenu;
+        this.date = date;
+        this.ville = ville;
+    }
+
+    public int getId(){
+        return id;
+    }
 
     public String getTitre(){
         return titre;
@@ -37,18 +51,6 @@ public class Note implements Serializable{
 
     public String getVille(){
         return ville;
-    }
-
-    public void setTitre(String titre){
-        this.titre = titre;
-    }
-
-    public void setContenu(String contenu){
-        this.contenu = contenu;
-    }
-
-    public void setVille(String ville){
-        this.ville = ville;
     }
 
     @Override

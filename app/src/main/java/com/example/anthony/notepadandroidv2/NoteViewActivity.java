@@ -27,5 +27,6 @@ public class NoteViewActivity extends AppCompatActivity {
         Intent intent = new Intent(this, NoteActivity.class);
         intent.putExtra(MainActivity.EXTRA_MSG_NOTE, note);
         startActivity(intent);
+        finish();
     }
 }

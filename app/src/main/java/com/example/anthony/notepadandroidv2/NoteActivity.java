@@ -18,6 +18,7 @@ public class NoteActivity extends AppCompatActivity {
     protected EditText inputTitre;
     protected EditText inputVille;
     protected EditText inputContenu;
+    Note oldNote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +27,11 @@ public class NoteActivity extends AppCompatActivity {
         inputTitre = (EditText)findViewById(R.id.zoneTitre);
         inputVille = (EditText)findViewById(R.id.zoneVille);
         inputContenu = (EditText)findViewById(R.id.zoneTexte);
-        Note note = (Note)getIntent().getSerializableExtra(MainActivity.EXTRA_MSG_NOTE);
-        if(note != null){
-            inputTitre.setText(note.getTitre());
-            inputVille.setText(note.getVille());
-            inputContenu.setText(note.getContenu());
+        oldNote = (Note)getIntent().getSerializableExtra(MainActivity.EXTRA_MSG_NOTE);
+        if(oldNote != null){
+            inputTitre.setText(oldNote.getTitre());
+            inputVille.setText(oldNote.getVille());
+            inputContenu.setText(oldNote.getContenu());
         }
     }
 
@@ -51,11 +52,22 @@ public class NoteActivity extends AppCompatActivity {
         if(!titre.equals("") && !ville.equals("") && !contenu.equals("")){
             //TODO recuper coordonnees gps
 
-            Note note = new Note(titre, contenu, date,ville);
+            Note note = null;
 
-            //ajouter dans la base la nouvelle note
             NoteDB noteDB = new NoteDB(getApplicationContext());
-            noteDB.addNewNote(note);
+
+            //si on creer une note
+            if(oldNote == null) {
+                note = new Note(titre, contenu, date,ville);
+                //on ajoute dans la base la nouvelle note
+                noteDB.addNewNote(note);
+            }
+            //sinon si on edite une note existante
+            else if(oldNote.getId() >= 0){
+                note = new Note(oldNote.getId(), titre, contenu, date, ville);
+                //on met a jour la note
+                noteDB.updateNote(note);
+            }
 
             //revenir a MainActivity
             Intent intent = new Intent(this, MainActivity.class);
@@ -66,6 +78,7 @@ public class NoteActivity extends AppCompatActivity {
             Toast toast = Toast.makeText(getApplicationContext(), "Mauvaise saisie...", Toast.LENGTH_SHORT);
             toast.show();
         }
+        finish();
     }//enregistrer(View view)
 
     public void annuler(View view){
@@ -74,5 +87,6 @@ public class NoteActivity extends AppCompatActivity {
          */
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        finish();
     }//annuler(View view)
 }

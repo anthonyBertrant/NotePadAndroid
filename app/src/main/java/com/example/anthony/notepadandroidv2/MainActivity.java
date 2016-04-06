@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements OnListFragmentInt
         Intent intent = new Intent(this, NoteViewActivity.class);
         intent.putExtra(EXTRA_MSG_NOTE, note);
         startActivity(intent);
+        finish();
     }
 
     @Override
