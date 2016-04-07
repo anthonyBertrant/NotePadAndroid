@@ -66,7 +66,7 @@ public class NoteListFragment extends Fragment {
         // Set the adapter
         if (view instanceof RecyclerView) {
             NoteDB noteDB = new NoteDB(getContext());
-            notes = noteDB.getNotes();
+            notes = noteDB.getNotes(getContext());
 
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;

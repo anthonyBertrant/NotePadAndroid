@@ -30,7 +30,16 @@ public class NoteViewActivity extends AppCompatActivity {
         finish();
     }
 
+    public void deleteNote(View view){
+        NoteDB noteDB = new NoteDB(getApplicationContext());
+        noteDB.deleteNote(note);
+
+        backToList(null);
+    }
+
     public void backToList(View view){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
         finish();
     }
 }

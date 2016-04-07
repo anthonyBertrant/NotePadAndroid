@@ -14,6 +14,7 @@ import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements OnListFragmentInteractionListener
                                                                 , OnFragmentInteractionListener{
@@ -29,7 +30,8 @@ public class MainActivity extends AppCompatActivity implements OnListFragmentInt
         setContentView(R.layout.activity_main);
 
         NoteDBOpenHelper.getNoteBDOpenHelper(getBaseContext());
-
+        //NoteDB noteDB = new NoteDB(getApplicationContext());
+        //noteDB.addNewNote(new Note("noteNîmes", "BLABLABAL", "03/04/2016", "Nîmes"));
         //creation des fragments
         fragments = new Fragment[1];
         fragments[0] = NoteListFragment.newInstance(1);
@@ -45,13 +47,23 @@ public class MainActivity extends AppCompatActivity implements OnListFragmentInt
     public void createNewNote(View view){
         Intent intent = new Intent(this, NoteActivity.class);
         startActivity(intent);
+        finish();
     }
 
     @Override
     public void onListFragmentInteraction(Note note) {
-        Intent intent = new Intent(this, NoteViewActivity.class);
-        intent.putExtra(EXTRA_MSG_NOTE, note);
-        startActivity(intent);
+        String villeGetFromCoord = Geoloc.getCoordonates(getApplicationContext());
+        if(note.getVille().equals(villeGetFromCoord)) {
+            Intent intent = new Intent(this, NoteViewActivity.class);
+            intent.putExtra(EXTRA_MSG_NOTE, note);
+            startActivity(intent);
+            Toast toast = Toast.makeText(getApplicationContext(), "Note déverouillée !", Toast.LENGTH_SHORT);
+            toast.show();
+            finish();
+        }else{
+            Toast toast = Toast.makeText(getApplicationContext(), "Note verrouillée !", Toast.LENGTH_SHORT);
+            toast.show();
+        }
     }
 
     @Override

@@ -25,7 +25,7 @@ public class NoteDB {
         values.put(NoteDBOpenHelper.COLUMN_VILLE, note.getVille());
         values.put(NoteDBOpenHelper.COLUMN_CONTENU, note.getContenu());
         values.put(NoteDBOpenHelper.COLUMN_DATE, note.getDate());
-        dbWritable.insert(NoteDBOpenHelper.DATABASE_TABLE_NOTE, null,values);
+        dbWritable.insert(NoteDBOpenHelper.DATABASE_TABLE_NOTE, null, values);
     }//addNewNote(Note)
 
     public void updateNote(Note note){
@@ -39,7 +39,7 @@ public class NoteDB {
                 , whereClause, null);
     }//updateNote(Note)
 
-    public ArrayList<Note> getNotes(){
+    public ArrayList<Note> getNotes(Context context){
         ArrayList<Note> notes = new ArrayList<>();
         String[] columns = {NoteDBOpenHelper.COLUMN_ID
                     ,NoteDBOpenHelper.COLUMN_TITRE
@@ -56,10 +56,17 @@ public class NoteDB {
             String ville = cursor.getString(2);
             String contenu = cursor.getString(3);
             String date = cursor.getString(4);
+
             notes.add(new Note(id, titre, contenu, date, ville));
+
             cursor.moveToNext();
         }
 
         return notes;
     }//getNotes()   returns ArrayList<Note>
+
+    public void deleteNote(Note note){
+        dbWritable.delete(NoteDBOpenHelper.DATABASE_TABLE_NOTE
+                , NoteDBOpenHelper.COLUMN_ID+"="+note.getId(), null);
+    }
 }
